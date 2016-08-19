@@ -56,6 +56,9 @@ You will see two environments (Staging and Production)
 </platform>
 ```
 
+The code base currently has my key in the config.xml so make sure to replace it
+with yours.
+
 ## Run the app
 ionic emulate ios
 
