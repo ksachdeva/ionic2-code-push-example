@@ -19,14 +19,6 @@ ionic hooks add
 ionic state restore
 ```
 
-## ------TEMP Instructions until pull request is accepted by ionic-native ---- ##
-ionic-native does not have support for code-push yet. The pull request that adds this support is 
-still under review and will become part of next release of ionic-native.
-
-If you want to try this example then please read the discussion in this issue thread on how to get
-yourself setup :
-https://github.com/ksachdeva/ionic2-code-push-example/issues/1
-
 ## Setup code-push account if you have not already
 
 ```
