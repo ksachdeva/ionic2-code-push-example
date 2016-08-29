@@ -1,16 +1,19 @@
 import { Component, NgZone } from '@angular/core';
 import { Platform, Events, AlertController } from 'ionic-angular';
 
-import { CodePush, SyncStatus } from 'ionic-native';
+import { SyncStatus } from 'ionic-native';
+import { CodePushService } from 'ionic2-code-push';
 
 @Component({
-  templateUrl: 'build/pages/root.html'
+  templateUrl: 'build/pages/root.html',
+  providers: [CodePushService]
 })
 export class RootPage {
 
   messageText: string;
 
   constructor(
+    private codePushService: CodePushService,
     private alertController: AlertController,
     private ngZone: NgZone,
     private platform: Platform,
@@ -20,7 +23,8 @@ export class RootPage {
 
     this.platform.ready().then(() => {
 
-      CodePush.sync().subscribe((syncStatus) => {
+      this.codePushService.sync().subscribe((syncStatus) => {
+
         console.log('Sync Status: ', syncStatus);
 
         if (syncStatus === SyncStatus.UP_TO_DATE) {
