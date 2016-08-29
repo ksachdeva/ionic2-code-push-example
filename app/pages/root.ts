@@ -59,6 +59,7 @@ export class RootPage {
             const alert = this.alertController.create({
               title: 'Update',
               message: 'A new update was installed and will be available on next app restart',
+              buttons: ['OK']
             });
             alert.present();
             alert.onDidDismiss(() => {
