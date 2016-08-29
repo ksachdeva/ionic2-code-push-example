@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { Platform, Events } from 'ionic-angular';
+import { Platform, Events, AlertController } from 'ionic-angular';
 
 import { CodePush, SyncStatus } from 'ionic-native';
 
@@ -11,6 +11,7 @@ export class RootPage {
   messageText: string;
 
   constructor(
+    private alertController: AlertController,
     private ngZone: NgZone,
     private platform: Platform,
     private events: Events) {
@@ -23,7 +24,6 @@ export class RootPage {
         console.log('Sync Status: ', syncStatus);
 
         if (syncStatus === SyncStatus.UP_TO_DATE) {
-          console.log('came here ..');
 
           // facing some zoning problems here !!
           // why ??
@@ -52,6 +52,18 @@ export class RootPage {
 
           case SyncStatus.INSTALLING_UPDATE:
             this.messageText = 'Installing update ..';
+            break;
+
+          case SyncStatus.UPDATE_INSTALLED:
+            this.messageText = 'Installed the update ..';
+            const alert = this.alertController.create({
+              title: 'Update',
+              message: 'A new update was installed and will be available on next app restart',
+            });
+            alert.present();
+            alert.onDidDismiss(() => {
+              this.events.publish('root:nav-to-home');
+            });
             break;
 
           case SyncStatus.ERROR:
